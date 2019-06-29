@@ -36,4 +36,14 @@ public class ProjectService{
     public Iterable<Project> findAllProjects(){
     	return projectRepository.findAll();
     }
+    
+    public void deleteProjectByIdentifier(String projectIdentifier) {
+    	Project project = projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
+    	
+    	if(project == null) {
+    		throw new ProjectIdException("Cannot delete projec with ID '"+projectIdentifier+"'. This project doesn't exist");
+    	}
+    	
+    	projectRepository.delete(project);
+    }
 }
