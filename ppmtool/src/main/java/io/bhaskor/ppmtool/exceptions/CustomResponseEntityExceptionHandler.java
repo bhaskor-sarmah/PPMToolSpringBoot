@@ -11,10 +11,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice // This is helping to get global exception. All controller comes here for exception advice
 @RestController
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler{
-
+	
 	@ExceptionHandler
-	public final ResponseEntity<Object> handleProjectIdException(ProjectIdException ex, WebRequest request){
-		ProjectIdExceptionResponse exceptionResponse = new ProjectIdExceptionResponse(ex.getMessage());
+	public final ResponseEntity<Object> handleCommonException(CommonException ex, WebRequest request){
+		CommonExceptionResponse exceptionResponse = new CommonExceptionResponse(ex.getMessage());
 		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
 	

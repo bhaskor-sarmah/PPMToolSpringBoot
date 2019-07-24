@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import io.bhaskor.ppmtool.domain.Backlog;
 import io.bhaskor.ppmtool.domain.Project;
-import io.bhaskor.ppmtool.exceptions.ProjectIdException;
+import io.bhaskor.ppmtool.exceptions.CommonException;
 import io.bhaskor.ppmtool.repository.BacklogRepository;
 import io.bhaskor.ppmtool.repository.ProjectRepository;
 
@@ -36,7 +36,7 @@ public class ProjectService{
         	
         	return projectRepository.save(project);
         }catch(Exception e) {
-        	throw new ProjectIdException("Project ID '"+project.getProjectIdentifier().toUpperCase()+"' already exists");
+        	throw new CommonException("Project ID '"+project.getProjectIdentifier().toUpperCase()+"' already exists");
         }
     }
     
@@ -45,7 +45,7 @@ public class ProjectService{
     	Project project = projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
     	
     	if(project == null) {
-    		throw new ProjectIdException("Project ID '"+projectIdentifier+"' dose not exists");
+    		throw new CommonException("Project ID '"+projectIdentifier+"' dose not exists");
     	}
     	
     	return project;
@@ -59,7 +59,7 @@ public class ProjectService{
     	Project project = projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
     	
     	if(project == null) {
-    		throw new ProjectIdException("Cannot delete projec with ID '"+projectIdentifier+"'. This project doesn't exist");
+    		throw new CommonException("Cannot delete projec with ID '"+projectIdentifier+"'. This project doesn't exist");
     	}
     	
     	projectRepository.delete(project);
