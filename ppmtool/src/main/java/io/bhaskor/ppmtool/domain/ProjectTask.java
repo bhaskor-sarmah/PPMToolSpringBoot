@@ -2,14 +2,20 @@ package io.bhaskor.ppmtool.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class ProjectTask {
@@ -33,6 +39,11 @@ public class ProjectTask {
 	private Date dueDate;
 	
 	// ManToOne with the Backlog
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@JoinColumn(name = "backlog_id", updatable = false, nullable = false)
+	@JsonIgnore
+	private Backlog backlog;
+	
 	@Column(updatable = false)
 	private String projectIdentifier;
 	
@@ -136,12 +147,22 @@ public class ProjectTask {
 		this.updated_At = updated_At;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "ProjectTask [id=" + id + ", projectSequemnce=" + projectSequemnce + ", summary=" + summary
 				+ ", acceptanceCriteria=" + acceptanceCriteria + ", status=" + status + ", priority=" + priority
-				+ ", dueDate=" + dueDate + ", projectIdentifier=" + projectIdentifier + ", created_At=" + created_At
-				+ ", updated_At=" + updated_At + "]";
+				+ ", dueDate=" + dueDate + ", backlog=" + backlog + ", projectIdentifier=" + projectIdentifier
+				+ ", created_At=" + created_At + ", updated_At=" + updated_At + "]";
+	}
+
+	public Backlog getBacklog() {
+		return backlog;
+	}
+
+	public void setBacklog(Backlog backlog) {
+		this.backlog = backlog;
 	}
 	
 	
