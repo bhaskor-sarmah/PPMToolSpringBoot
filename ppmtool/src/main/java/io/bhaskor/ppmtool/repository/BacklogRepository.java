@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import io.bhaskor.ppmtool.domain.Backlog;
 
 @Repository
-public interface BcklogRepository extends CrudRepository<Backlog, Long>{
-
+public interface BacklogRepository extends CrudRepository<Backlog, Long>{
+	
+	Backlog findByProjectIdentifier(String Identifier);
 }
