@@ -73,12 +73,12 @@ public class ProjectTask {
 		this.id = id;
 	}
 
-	public String getProjectSequemnce() {
+	public String getProjectSequence() {
 		return projectSequence;
 	}
 
-	public void setProjectSequemnce(String projectSequemnce) {
-		this.projectSequence = projectSequemnce;
+	public void setProjectSequence(String projectSequence) {
+		this.projectSequence = projectSequence;
 	}
 
 	public String getSummary() {
