@@ -21,43 +21,41 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ProjectTask {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(updatable = false)
-	private String projectSequemnce;
+
+	@Column(updatable = false, unique = true)
+	private String projectSequence;
 
 	@NotBlank(message = "Please include a project summary")
 	private String summary;
-	
+
 	private String acceptanceCriteria;
-	
+
 	private String status;
-	
+
 	private Integer priority;
-	
+
 	private Date dueDate;
-	
+
 	// ManToOne with the Backlog
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "backlog_id", updatable = false, nullable = false)
 	@JsonIgnore
 	private Backlog backlog;
-	
+
 	@Column(updatable = false)
 	private String projectIdentifier;
-	
-	private Date created_At;
-	
-	private Date updated_At;
-	
 
-	
+	private Date created_At;
+
+	private Date updated_At;
+
 	@PrePersist
 	protected void onCreate() {
 		this.created_At = new Date();
 	}
-	
+
 	@PreUpdate
 	protected void onUpdate() {
 		this.updated_At = new Date();
@@ -76,11 +74,11 @@ public class ProjectTask {
 	}
 
 	public String getProjectSequemnce() {
-		return projectSequemnce;
+		return projectSequence;
 	}
 
 	public void setProjectSequemnce(String projectSequemnce) {
-		this.projectSequemnce = projectSequemnce;
+		this.projectSequence = projectSequemnce;
 	}
 
 	public String getSummary() {
@@ -147,11 +145,9 @@ public class ProjectTask {
 		this.updated_At = updated_At;
 	}
 
-	
-
 	@Override
 	public String toString() {
-		return "ProjectTask [id=" + id + ", projectSequemnce=" + projectSequemnce + ", summary=" + summary
+		return "ProjectTask [id=" + id + ", projectSequence=" + projectSequence + ", summary=" + summary
 				+ ", acceptanceCriteria=" + acceptanceCriteria + ", status=" + status + ", priority=" + priority
 				+ ", dueDate=" + dueDate + ", backlog=" + backlog + ", projectIdentifier=" + projectIdentifier
 				+ ", created_At=" + created_At + ", updated_At=" + updated_At + "]";
@@ -164,6 +160,5 @@ public class ProjectTask {
 	public void setBacklog(Backlog backlog) {
 		this.backlog = backlog;
 	}
-	
-	
+
 }
