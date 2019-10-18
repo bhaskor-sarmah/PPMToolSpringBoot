@@ -47,7 +47,7 @@ public class ProjectTaskService {
 				backlog.setPTSequence(backLogSequence);
 
 				// Add sequence to projectTask
-				projectTask.setProjectSequemnce(projectIdentifier + "-" + backLogSequence);
+				projectTask.setProjectSequence(projectIdentifier + "-" + backLogSequence);
 				projectTask.setProjectIdentifier(projectIdentifier);
 
 				// Initial priority when priority null
@@ -114,7 +114,7 @@ public class ProjectTaskService {
 		
 		ProjectTask projectTask = findPTByProjectSequence(backlog_id, pt_id);
 		
-		if(!projectTask.getProjectSequemnce().equals(updatedTask.getProjectSequemnce())) {
+		if(!projectTask.getProjectSequence().equals(updatedTask.getProjectSequence())) {
 			throw new CommonException("Project Sequence '"+pt_id+"' not matching");
 		}
 		
